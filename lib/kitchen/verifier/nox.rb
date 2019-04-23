@@ -64,7 +64,7 @@ module Kitchen
           tests = config[:tests].collect{|test| "-n #{test}"}.join(' ')
         end
 
-        if config[:enable_filenames] and ENV['CHANGE_TARGET'] and ENV['BRANCH_NAME']
+        if config[:enable_filenames] and ENV['CHANGE_TARGET'] and ENV['BRANCH_NAME'] and ENV['FORCE_FULL'] != 'true'
           require 'git'
           repo = Git.open(Dir.pwd)
           config[:from_filenames] = repo.diff("origin/#{ENV['CHANGE_TARGET']}",
